@@ -1,0 +1,40 @@
+---
+import { services } from '../data/services';
+import ServiceCard from './ServiceCard.astro';
+---
+
+<section id="servizi" class="bg-cream py-28 px-8 lg:px-28">
+
+  <!-- Header -->
+  <div class="max-w-[1200px] mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-end">
+    <div>
+      <p class="text-[0.72rem] font-medium tracking-[0.2em] uppercase text-warm mb-4">
+        Cosa offro
+      </p>
+      <h2 class="font-serif font-light text-txt leading-[1.2] text-[clamp(2rem,3.5vw,3rem)]">
+        I miei <em class="italic text-sage">servizi</em>
+      </h2>
+    </div>
+    <div>
+      <p class="text-base text-txt-mid font-light leading-[1.8]">
+        Ogni percorso è unico. Offro un servizio su misura, calibrato sulle esigenze specifiche di ogni persona, online o in presenza.
+      </p>
+    </div>
+  </div>
+
+  <!-- Cards grid -->
+  <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {services.map((service) => (
+      <div class="fade-up">
+        <ServiceCard
+          title={service.title}
+          description={service.description}
+          iconSvg={service.iconSvg}
+          linkText={service.linkText}
+          linkHref={service.linkHref}
+        />
+      </div>
+    ))}
+  </div>
+
+</section>

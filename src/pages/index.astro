@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import MobileMenu from '../components/MobileMenu.tsx';
+import Hero from '../components/Hero.astro';
+import Stats from '../components/Stats.astro';
+import About from '../components/About.astro';
+import Services from '../components/Services.astro';
+import Approach from '../components/Approach.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout>
+  <Nav />
+  <MobileMenu client:media="(max-width: 900px)" />
+  <Hero />
+  <Stats />
+  <About />
+  <Services />
+  <Approach />
+  <Testimonials />
+  <Contact />
+  <Footer />
+</BaseLayout>

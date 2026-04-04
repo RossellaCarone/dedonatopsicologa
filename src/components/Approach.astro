@@ -1,0 +1,39 @@
+---
+import { approachSteps } from "../data/approach";
+import ApproachStep from "./ApproachStep.astro";
+---
+
+<section id="approccio" class="bg-sage-pale py-28 px-8 lg:px-28">
+  <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 lg:gap-24 items-start">
+
+    <!-- Left column -->
+    <div class="fade-up">
+      <p class="text-[0.72rem] font-medium tracking-[0.2em] uppercase text-warm mb-4">
+        Il mio metodo
+      </p>
+
+      <h2 class="font-serif font-light text-txt leading-[1.2] text-[clamp(2rem,3.5vw,3rem)]">
+        Come<br>lavoro<br><em class="italic text-sage">con te</em>
+      </h2>
+
+      <div class="w-12 h-px bg-warm my-6"></div>
+
+      <p class="text-base text-txt-mid font-light leading-[1.8]">
+        Il mio intervento ha un'impronta clinica e dinamica, attenta alle dinamiche interiori e al modo in cui queste si riflettono nei tuoi legami quotidiani. Con empatia e competenza, ti accompagnerò nell'esplorazione dei tuoi vissuti per favorire un cambiamento autentico e duraturo.
+      </p>
+    </div>
+
+    <!-- Right column: steps -->
+    <div class="fade-up">
+      {approachSteps.map((step) => (
+        <ApproachStep
+          number={step.number}
+          title={step.title}
+          boldPrefix={step.boldPrefix}
+          description={step.description}
+        />
+      ))}
+    </div>
+
+  </div>
+</section>
