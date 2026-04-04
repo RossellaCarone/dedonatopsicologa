@@ -7,27 +7,19 @@ export interface Stat {
 
 export const stats: Stat[] = [
   {
-    value: "Albo A",
-    suffix: "",
-    label: "Ordine Psicologi Puglia",
-    isText: true,
+    value: 100,
+    suffix: "%",
+    label: "Percorsi su misura",
   },
   {
-    value: "Clinico",
-    suffix: "",
-    label: "e Dinamico",
-    isText: true,
+    value: 30,
+    suffix: " min",
+    label: "Prima consulenza gratuita",
   },
   {
     value: "Online",
     suffix: "",
     label: "e in presenza",
-    isText: true,
-  },
-  {
-    value: "1ª consulenza",
-    suffix: "",
-    label: "gratuita",
     isText: true,
   },
 ];
