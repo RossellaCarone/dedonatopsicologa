@@ -8,23 +8,23 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "Sin dal primo incontro mi sono sentita accolta e ascoltata senza giudizio. Monica ha un modo delicato ma deciso di guidarti verso una maggiore consapevolezza di te stessa.",
-    name: "Valentina M.",
-    role: "Percorso individuale",
-    initials: "VM",
+      "Creo uno spazio di ascolto autentico, privo di giudizio, dove ogni persona può esprimersi liberamente. La relazione terapeutica è il fondamento da cui parte ogni percorso di crescita e cambiamento.",
+    name: "Ascolto Empatico",
+    role: "Uno spazio sicuro per te",
+    initials: "AE",
   },
   {
     quote:
-      "Avevo tanti dubbi sul iniziare un percorso psicologico, ma Monica mi ha messo subito a mio agio. Ogni seduta è uno spazio sicuro dove poter esplorare i miei pensieri.",
-    name: "Luca G.",
-    role: "Consulenza online",
-    initials: "LG",
+      "Il mio approccio clinico e dinamico integra la comprensione profonda dei processi emotivi con strumenti evidence-based. Ogni percorso è costruito sulla tua storia, non su schemi preconfezionati.",
+    name: "Approccio Clinico e Dinamico",
+    role: "Fondato sull'evidenza, centrato su di te",
+    initials: "CD",
   },
   {
     quote:
-      "Quello che apprezzo di più è la capacità di Monica di cogliere sfumature che nemmeno io riuscivo a vedere. Un approccio professionale e profondamente umano.",
-    name: "Sara T.",
-    role: "Percorso individuale",
-    initials: "ST",
+      "Lavoro sia in presenza che online, adattando tempi e modalità alle tue esigenze reali. Che tu sia adulto, giovane adulto, adolescente o in coppia, il percorso prende forma insieme a te.",
+    name: "Flessibilità e Personalizzazione",
+    role: "Online e in presenza, su misura",
+    initials: "FL",
   },
 ];

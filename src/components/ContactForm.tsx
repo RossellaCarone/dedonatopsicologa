@@ -3,8 +3,8 @@ import { useState, useRef } from 'preact/hooks';
 type FormState = 'idle' | 'loading' | 'success' | 'error';
 
 const inputBase: Record<string, string | number> = {
-  background: 'rgba(255,255,255,0.06)',
-  border: '1px solid rgba(255,255,255,0.12)',
+  background: 'rgba(255,255,255,0.15)',
+  border: '1px solid rgba(255,255,255,0.25)',
   borderRadius: '2px',
   padding: '0.85rem 1rem',
   fontFamily: "'DM Sans', system-ui, sans-serif",
@@ -17,12 +17,12 @@ const inputBase: Record<string, string | number> = {
 };
 
 const focusStyle = {
-  borderColor: '#c8d8c9',
-  boxShadow: '0 0 0 3px rgba(138,158,140,0.15)',
+  borderColor: '#ffffff',
+  boxShadow: '0 0 0 3px rgba(255,255,255,0.2)',
 };
 
 const blurStyle = {
-  borderColor: 'rgba(255,255,255,0.12)',
+  borderColor: 'rgba(255,255,255,0.25)',
   boxShadow: 'none',
 };
 
@@ -89,7 +89,7 @@ export default function ContactForm() {
     fontWeight: 500,
     letterSpacing: '0.1em',
     textTransform: 'uppercase',
-    color: 'rgba(255,255,255,0.45)',
+    color: 'rgba(255,255,255,0.7)',
     marginBottom: '0.4rem',
   };
 
@@ -162,25 +162,25 @@ export default function ContactForm() {
           onFocus={(e) => applyFocus(e.currentTarget as HTMLElement)}
           onBlur={(e) => applyBlur(e.currentTarget as HTMLElement)}
         >
-          <option value="" disabled selected style={{ background: '#2c2c2a', color: 'white' }}>
+          <option value="" disabled selected style={{ background: '#8a9e8c', color: 'white' }}>
             Seleziona un servizio
           </option>
-          <option value="Prima consulenza gratuita" style={{ background: '#2c2c2a', color: 'white' }}>
+          <option value="Prima consulenza gratuita" style={{ background: '#8a9e8c', color: 'white' }}>
             Prima consulenza gratuita
           </option>
-          <option value="Psicoterapia individuale" style={{ background: '#2c2c2a', color: 'white' }}>
-            Psicoterapia individuale
+          <option value="Supporto psicologico individuale" style={{ background: '#8a9e8c', color: 'white' }}>
+            Supporto psicologico individuale
           </option>
-          <option value="Terapia di coppia" style={{ background: '#2c2c2a', color: 'white' }}>
-            Terapia di coppia
+          <option value="Consulenza di coppia" style={{ background: '#8a9e8c', color: 'white' }}>
+            Consulenza di coppia
           </option>
-          <option value="Consulenza online" style={{ background: '#2c2c2a', color: 'white' }}>
+          <option value="Consulenza online" style={{ background: '#8a9e8c', color: 'white' }}>
             Consulenza online
           </option>
-          <option value="EMDR" style={{ background: '#2c2c2a', color: 'white' }}>
-            EMDR
+          <option value="Supporto nelle transizioni" style={{ background: '#8a9e8c', color: 'white' }}>
+            Supporto nelle transizioni
           </option>
-          <option value="Altro" style={{ background: '#2c2c2a', color: 'white' }}>
+          <option value="Altro" style={{ background: '#8a9e8c', color: 'white' }}>
             Altro
           </option>
         </select>
@@ -208,10 +208,10 @@ export default function ContactForm() {
       <style>{`
         form input::placeholder,
         form textarea::placeholder {
-          color: rgba(255,255,255,0.25);
+          color: rgba(255,255,255,0.5);
         }
         form select option {
-          background: #2c2c2a;
+          background: #8a9e8c;
           color: white;
         }
       `}</style>

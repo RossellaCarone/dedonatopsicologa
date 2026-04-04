@@ -1,9 +1,11 @@
 ---
 ---
 
-<nav id="main-nav" class="nav-bar fixed top-0 left-0 right-0 z-[100] h-16 flex items-center justify-between px-8 transition-all duration-300">
-  <a href="#" class="font-serif text-xl tracking-wide text-txt no-underline">
-    Monica De Donato <span class="text-sage italic">Psicologa</span>
+<nav id="main-nav" class="nav-bar fixed top-0 left-0 right-0 z-[100] h-16 flex items-center justify-between px-4 md:px-8 transition-all duration-300">
+  <a href="#" class="font-serif text-[0.95rem] sm:text-base md:text-xl tracking-wide text-txt no-underline shrink min-w-0 mr-4 leading-tight">
+    <span class="hidden sm:inline">Monica De Donato</span>
+    <span class="sm:hidden">M. De Donato</span>
+    <span class="text-sage italic"> Psicologa</span>
   </a>
 
   <div class="hidden md:flex items-center gap-10">
@@ -12,17 +14,27 @@
     <a href="#approccio" class="text-[0.8rem] font-normal tracking-[0.12em] uppercase text-txt-mid hover:text-sage transition-colors">Approccio</a>
   </div>
 
-  <div class="flex items-center gap-4">
-    <a href="#contatti" class="bg-sage text-white py-2 px-5 text-[0.8rem] font-medium tracking-[0.08em] uppercase rounded-sm hover:bg-[#6e8370] transition-colors">
+  <div class="flex items-center gap-3">
+    <a href="#contatti" class="hidden sm:inline-flex bg-sage text-white py-2 px-4 md:px-5 text-[0.8rem] font-medium tracking-[0.08em] uppercase rounded-sm hover:bg-[#6e8370] transition-colors whitespace-nowrap">
       Prenota
     </a>
-    <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center gap-[5px] w-8 h-8" aria-label="Menu">
-      <span class="block w-5 h-px bg-txt-mid transition-transform duration-300"></span>
-      <span class="block w-5 h-px bg-txt-mid transition-opacity duration-300"></span>
-      <span class="block w-5 h-px bg-txt-mid transition-transform duration-300"></span>
+    <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center gap-[5px] w-11 h-11 -mr-1.5" aria-label="Menu" aria-expanded="false">
+      <span class="hamburger-line block w-5 h-px bg-txt-mid transition-all duration-300"></span>
+      <span class="hamburger-line block w-5 h-px bg-txt-mid transition-all duration-300"></span>
+      <span class="hamburger-line block w-5 h-px bg-txt-mid transition-all duration-300"></span>
     </button>
   </div>
 </nav>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" class="fixed top-16 left-0 right-0 z-[99] nav-bar border-b border-sage/20 translate-y-[-100%] opacity-0 pointer-events-none transition-all duration-300 md:hidden">
+  <div class="flex flex-col py-4 px-6 gap-1">
+    <a href="#chi-sono" class="mobile-menu-link py-3 text-[0.85rem] font-normal tracking-[0.12em] uppercase text-txt-mid hover:text-sage transition-colors border-b border-sage/10">Chi sono</a>
+    <a href="#servizi" class="mobile-menu-link py-3 text-[0.85rem] font-normal tracking-[0.12em] uppercase text-txt-mid hover:text-sage transition-colors border-b border-sage/10">Servizi</a>
+    <a href="#approccio" class="mobile-menu-link py-3 text-[0.85rem] font-normal tracking-[0.12em] uppercase text-txt-mid hover:text-sage transition-colors border-b border-sage/10">Approccio</a>
+    <a href="#contatti" class="mobile-menu-link mt-3 py-3 bg-sage text-white text-center text-[0.85rem] font-medium tracking-[0.08em] uppercase rounded-sm">Prenota una consulenza</a>
+  </div>
+</div>
 
 <style>
   .nav-bar {
@@ -34,4 +46,36 @@
     background: rgba(250, 248, 244, 1);
     border-bottom: 1px solid rgba(138, 158, 140, 0.3);
   }
+  #mobile-menu.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #mobile-menu-btn[aria-expanded="true"] .hamburger-line:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  #mobile-menu-btn[aria-expanded="true"] .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+  #mobile-menu-btn[aria-expanded="true"] .hamburger-line:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
 </style>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const links = menu?.querySelectorAll('.mobile-menu-link');
+
+  btn?.addEventListener('click', () => {
+    const isOpen = menu?.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  links?.forEach(link => {
+    link.addEventListener('click', () => {
+      menu?.classList.remove('open');
+      btn?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>

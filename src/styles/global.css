@@ -23,6 +23,7 @@
   body {
     @apply font-sans text-txt bg-cream leading-relaxed;
     font-size: 16px;
+    overflow-x: hidden;
   }
 
   /* Grain texture overlay */
