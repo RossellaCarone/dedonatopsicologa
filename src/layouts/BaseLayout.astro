@@ -128,6 +128,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       });
     }
 
+    // Enhanced smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        const href = anchor.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        const top = (target as HTMLElement).offsetTop - 72;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    });
+
     // Nav active link highlight
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
