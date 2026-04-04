@@ -1,0 +1,20 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  boldPrefix?: string;
+  description: string;
+}
+
+const { number, title, boldPrefix, description } = Astro.props;
+---
+
+<div class="grid grid-cols-[48px_1fr] gap-6 py-8 border-b border-sage/20 items-start first:pt-0">
+  <span class="font-serif text-[2rem] font-light text-sage-light leading-none">{number}</span>
+  <div>
+    <h3 class="font-serif text-[1.2rem] font-normal text-txt mb-2">{title}</h3>
+    <p class="text-[0.9rem] text-txt-mid font-light leading-[1.7]">
+      {boldPrefix && <strong class="font-medium">{boldPrefix}</strong>}{boldPrefix ? " " : ""}{description}
+    </p>
+  </div>
+</div>

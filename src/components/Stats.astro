@@ -1,0 +1,22 @@
+---
+import { stats } from '../data/stats';
+import AnimatedCounter from './AnimatedCounter.tsx';
+---
+
+<section class="bg-warm-light py-14 px-8 lg:px-28">
+  <div class="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+    {stats.map((stat) => (
+      <div class="text-center fade-up">
+        <AnimatedCounter
+          client:visible
+          target={stat.value as number}
+          suffix={stat.suffix}
+          isText={stat.isText ?? false}
+        />
+        <p class="text-[0.78rem] font-medium tracking-[0.12em] uppercase text-txt-light">
+          {stat.label}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>

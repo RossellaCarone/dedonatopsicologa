@@ -1,0 +1,25 @@
+---
+import { testimonials } from '../data/testimonials';
+import TestimonialCarousel from './TestimonialCarousel.tsx';
+---
+
+<section class="bg-white py-28 px-8 lg:px-28">
+  <div class="max-w-[1200px] mx-auto">
+
+    <!-- Header -->
+    <div class="text-center mb-16 fade-up">
+      <p class="text-[0.72rem] font-medium tracking-[0.2em] uppercase text-warm mb-4">
+        Cosa dicono
+      </p>
+      <h2 class="font-serif font-light text-txt leading-[1.2] text-[clamp(2rem,3.5vw,3rem)]">
+        Le <em class="italic text-sage">esperienze</em> dei miei pazienti
+      </h2>
+    </div>
+
+    <!-- Carousel island -->
+    <div class="fade-up">
+      <TestimonialCarousel client:visible testimonials={testimonials} />
+    </div>
+
+  </div>
+</section>

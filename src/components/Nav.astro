@@ -1,0 +1,37 @@
+---
+---
+
+<nav id="main-nav" class="nav-bar fixed top-0 left-0 right-0 z-[100] h-16 flex items-center justify-between px-8 transition-all duration-300">
+  <a href="#" class="font-serif text-xl tracking-wide text-txt no-underline">
+    Monica De Donato <span class="text-sage italic">Psicologa</span>
+  </a>
+
+  <div class="hidden md:flex items-center gap-10">
+    <a href="#chi-sono" class="text-[0.8rem] font-normal tracking-[0.12em] uppercase text-txt-mid hover:text-sage transition-colors">Chi sono</a>
+    <a href="#servizi" class="text-[0.8rem] font-normal tracking-[0.12em] uppercase text-txt-mid hover:text-sage transition-colors">Servizi</a>
+    <a href="#approccio" class="text-[0.8rem] font-normal tracking-[0.12em] uppercase text-txt-mid hover:text-sage transition-colors">Approccio</a>
+  </div>
+
+  <div class="flex items-center gap-4">
+    <a href="#contatti" class="bg-sage text-white py-2 px-5 text-[0.8rem] font-medium tracking-[0.08em] uppercase rounded-sm hover:bg-[#6e8370] transition-colors">
+      Prenota
+    </a>
+    <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center gap-[5px] w-8 h-8" aria-label="Menu">
+      <span class="block w-5 h-px bg-txt-mid transition-transform duration-300"></span>
+      <span class="block w-5 h-px bg-txt-mid transition-opacity duration-300"></span>
+      <span class="block w-5 h-px bg-txt-mid transition-transform duration-300"></span>
+    </button>
+  </div>
+</nav>
+
+<style>
+  .nav-bar {
+    background: rgba(250, 248, 244, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(138, 158, 140, 0.2);
+  }
+  .nav-bar.scrolled {
+    background: rgba(250, 248, 244, 1);
+    border-bottom: 1px solid rgba(138, 158, 140, 0.3);
+  }
+</style>

@@ -1,0 +1,82 @@
+---
+import ContactForm from './ContactForm.tsx';
+---
+
+<section id="contatti" class="bg-txt py-28 px-8 lg:px-28 text-white">
+  <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-start">
+
+    <!-- Left column -->
+    <div class="fade-up">
+      <p class="text-[0.72rem] font-medium tracking-[0.2em] uppercase text-warm mb-4">
+        Contatti
+      </p>
+
+      <h2 class="font-serif font-light text-white leading-[1.2] text-[clamp(2rem,3.5vw,3rem)]">
+        Inizia il tuo<br><em class="italic text-sage">percorso</em> oggi
+      </h2>
+
+      <div class="w-12 h-px bg-warm my-6"></div>
+
+      <p class="text-white/60 text-base font-light leading-[1.8]">
+        Iniziare un percorso è un atto di coraggio verso se stessi. Se senti il bisogno di un confronto o vuoi fissare un primo colloquio, puoi trovarmi qui. La prima consulenza è gratuita e senza impegno — rispondo entro 24 ore.
+      </p>
+
+      <!-- Contact details -->
+      <div class="mt-10 flex flex-col gap-6">
+
+        <!-- Phone -->
+        <div class="flex gap-4 items-start">
+          <div class="w-10 h-10 border border-white/15 rounded-full flex items-center justify-center shrink-0">
+            <svg viewBox="0 0 24 24" class="w-4 h-4 stroke-sage-light fill-none stroke-[1.5]" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.59 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-[0.72rem] font-medium tracking-[0.15em] uppercase text-white/40 mb-0.5">Telefono</p>
+            <p class="text-[0.95rem] text-white/85">+39 3388000616</p>
+            <p class="text-[0.75rem] text-white/60 mt-1">Disponibile anche via WhatsApp</p>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="flex gap-4 items-start">
+          <div class="w-10 h-10 border border-white/15 rounded-full flex items-center justify-center shrink-0">
+            <svg viewBox="0 0 24 24" class="w-4 h-4 stroke-sage-light fill-none stroke-[1.5]" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-[0.72rem] font-medium tracking-[0.15em] uppercase text-white/40 mb-0.5">Email</p>
+            <p class="text-[0.95rem] text-white/85">psicologadedonato@gmail.com</p>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="flex gap-4 items-start">
+          <div class="w-10 h-10 border border-white/15 rounded-full flex items-center justify-center shrink-0">
+            <svg viewBox="0 0 24 24" class="w-4 h-4 stroke-sage-light fill-none stroke-[1.5]" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-[0.72rem] font-medium tracking-[0.15em] uppercase text-white/40 mb-0.5">Studio</p>
+            <p class="text-[0.95rem] text-white/85">
+              Polignano a Mare (BA)<br>
+              Monopoli (BA)<br>
+              Consulenze Online
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Right column: contact form (Preact island) -->
+    <div class="fade-up">
+      <ContactForm client:visible />
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,37 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  iconSvg: string;
+  linkText: string;
+  linkHref: string;
+}
+
+const { title, description, iconSvg, linkText, linkHref } = Astro.props;
+---
+
+<div class="bg-white rounded-sm p-10 px-8 border border-sage/15 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(44,44,42,0.07)]">
+  <div class="w-12 h-12 bg-sage-pale rounded-full flex items-center justify-center mb-6">
+    <svg
+      class="w-[22px] h-[22px] stroke-sage fill-none"
+      style="stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
+      viewBox="0 0 24 24"
+      set:html={iconSvg}
+    />
+  </div>
+
+  <h3 class="font-serif text-[1.35rem] font-normal text-txt mb-3">
+    {title}
+  </h3>
+
+  <p class="text-[0.9rem] text-txt-mid font-light leading-[1.75]">
+    {description}
+  </p>
+
+  <a
+    href={linkHref}
+    class="inline-flex items-center gap-1.5 mt-5 text-[0.8rem] font-medium tracking-[0.08em] uppercase text-sage hover:gap-3 transition-all"
+  >
+    {linkText}
+  </a>
+</div>
