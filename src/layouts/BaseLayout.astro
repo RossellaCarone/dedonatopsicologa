@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 interface Props {
   title?: string;
   description?: string;
@@ -78,7 +80,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     ]
   })} />
 </head>
-<body>
+<body id="top">
+  <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
   <slot />
 
   <!-- Scroll to top button -->
@@ -90,72 +93,144 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
   <!-- Scroll animations observer -->
   <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealedElements = Array.from(
+      document.querySelectorAll('[data-reveal], .fade-up')
+    ) as HTMLElement[];
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.14, rootMargin: '0px 0px -8% 0px' }
+    );
 
-    // Nav scroll effect
+    revealedElements.forEach((element, index) => {
+      if (!element.style.getPropertyValue('--reveal-delay')) {
+        element.style.setProperty('--reveal-delay', `${index * 18}ms`);
+      }
+      revealObserver.observe(element);
+    });
+
     const nav = document.querySelector('nav');
-    if (nav) {
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 20) {
-          nav.classList.add('scrolled');
-        } else {
-          nav.classList.remove('scrolled');
-        }
-      });
-    }
-
-    // Scroll to top button
     const scrollTopBtn = document.getElementById('scroll-top');
-    if (scrollTopBtn) {
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 500) {
-          scrollTopBtn.classList.add('visible');
-        } else {
-          scrollTopBtn.classList.remove('visible');
+    const scrollProgress = document.getElementById('scroll-progress');
+    const sections = Array.from(document.querySelectorAll('section[id]')) as HTMLElement[];
+    const navLinks = Array.from(document.querySelectorAll('.nav-link')) as HTMLAnchorElement[];
+    const parallaxElements = Array.from(document.querySelectorAll('[data-parallax]')) as HTMLElement[];
+    const stepCards = Array.from(document.querySelectorAll('[data-step-card]')) as HTMLElement[];
+
+    const updateActiveSection = () => {
+      let current = sections[0]?.id ?? '';
+
+      sections.forEach((section) => {
+        if (window.scrollY >= section.offsetTop - 120) {
+          current = section.id;
         }
       });
-      scrollTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
 
-    // Enhanced smooth scroll for all anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      navLinks.forEach((link) => {
+        link.classList.toggle('is-active', link.getAttribute('href') === `#${current}`);
+      });
+    };
+
+    const updateActiveStep = () => {
+      if (!stepCards.length) return;
+
+      let bestScore = 0;
+      let bestCard: HTMLElement | null = null;
+
+      stepCards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const visibleHeight = Math.max(
+          0,
+          Math.min(rect.bottom, window.innerHeight * 0.88) - Math.max(rect.top, window.innerHeight * 0.12)
+        );
+        const ratio = visibleHeight / Math.max(rect.height, 1);
+
+        if (ratio > bestScore) {
+          bestScore = ratio;
+          bestCard = card;
+        }
+      });
+
+      stepCards.forEach((card, index) => {
+        const shouldBeActive = bestScore > 0.2 ? card === bestCard : index === 0;
+        card.classList.toggle('is-active', shouldBeActive);
+      });
+    };
+
+    const updateParallax = () => {
+      if (reduceMotion) return;
+
+      parallaxElements.forEach((element) => {
+        const speed = Number(element.dataset.parallax ?? '0.08');
+        const rect = element.getBoundingClientRect();
+        const distanceFromCenter = rect.top + rect.height / 2 - window.innerHeight / 2;
+        element.style.setProperty('--parallax-shift', `${distanceFromCenter * speed * -0.08}px`);
+      });
+    };
+
+    const updateChrome = () => {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+
+      nav?.classList.toggle('scrolled', window.scrollY > 20);
+      scrollTopBtn?.classList.toggle('visible', window.scrollY > 500);
+
+      if (scrollProgress) {
+        scrollProgress.style.transform = `scaleX(${Math.min(Math.max(progress, 0), 1)})`;
+      }
+
+      updateActiveSection();
+      updateActiveStep();
+      updateParallax();
+    };
+
+    let ticking = false;
+    const requestChromeUpdate = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        updateChrome();
+        ticking = false;
+      });
+    };
+
+    window.addEventListener('scroll', requestChromeUpdate, { passive: true });
+    window.addEventListener('resize', requestChromeUpdate);
+    updateChrome();
+
+    scrollTopBtn?.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener('click', (e) => {
         const href = anchor.getAttribute('href');
         if (!href || href === '#') return;
+
         const target = document.querySelector(href);
         if (!target) return;
+
         e.preventDefault();
         const top = (target as HTMLElement).offsetTop - 72;
-        window.scrollTo({ top, behavior: 'smooth' });
+        window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
       });
     });
 
-    // Nav active link highlight
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('nav a[href^="#"]');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(sec => {
-        if (window.scrollY >= (sec as HTMLElement).offsetTop - 80) current = sec.id;
-      });
-      navLinks.forEach(a => {
-        (a as HTMLElement).style.color = a.getAttribute('href') === '#' + current ? '' : '';
-        if (a.getAttribute('href') === '#' + current && !a.classList.contains('bg-sage')) {
-          (a as HTMLElement).style.color = 'var(--sage)';
-        } else if (!a.classList.contains('bg-sage')) {
-          (a as HTMLElement).style.color = '';
-        }
+    document.querySelectorAll('[data-spotlight]').forEach((card) => {
+      card.addEventListener('pointermove', (event) => {
+        const target = card as HTMLElement;
+        const rect = target.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width) * 100;
+        const y = ((event.clientY - rect.top) / rect.height) * 100;
+        target.style.setProperty('--spotlight-x', `${x}%`);
+        target.style.setProperty('--spotlight-y', `${y}%`);
       });
     });
   </script>

@@ -4,17 +4,32 @@ interface Props {
   title: string;
   boldPrefix?: string;
   description: string;
+  delay?: number;
 }
 
-const { number, title, boldPrefix, description } = Astro.props;
+const { number, title, boldPrefix, description, delay = 0 } = Astro.props;
 ---
 
-<div class="grid grid-cols-[48px_1fr] gap-6 py-8 border-b border-sage/20 items-start first:pt-0">
-  <span class="font-serif text-[2rem] font-light text-sage-light leading-none">{number}</span>
-  <div>
-    <h3 class="font-serif text-[1.2rem] font-normal text-txt mb-2">{title}</h3>
-    <p class="text-[0.9rem] text-txt-mid font-light leading-[1.7]">
-      {boldPrefix && <strong class="font-medium">{boldPrefix}</strong>}{boldPrefix ? " " : ""}{description}
+<div
+  class="approach-step-card grid grid-cols-[58px_1fr] gap-5 rounded-[1.5rem] p-6 md:grid-cols-[72px_1fr] md:gap-6 md:p-7"
+  data-step-card
+  data-reveal="fade-up"
+  style={`--reveal-delay: ${delay}ms;`}
+>
+  <span class="flex h-14 w-14 items-center justify-center rounded-[1.1rem] border border-sage/15 bg-white/80 font-serif text-[1.55rem] font-light text-sage leading-none shadow-[0_10px_24px_rgba(44,44,42,0.04)] md:h-16 md:w-16 md:text-[1.8rem]">
+    {number}
+  </span>
+  <div class="relative pr-14 md:pr-16">
+    <span class="approach-step-arrow-wrap absolute right-0 top-0 flex h-10 w-10 items-center justify-center rounded-full border border-sage/15 bg-white/80 text-sage shadow-[0_10px_24px_rgba(44,44,42,0.04)] md:h-11 md:w-11">
+      <svg viewBox="0 0 24 24" class="approach-step-arrow h-4 w-4 stroke-current fill-none stroke-[1.8]" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M7 17 17 7" />
+        <path d="M9 7h8v8" />
+      </svg>
+    </span>
+    <p class="text-[0.68rem] font-medium tracking-[0.18em] uppercase text-warm/90 mb-2">Fase {number}</p>
+    <h3 class="font-serif text-[1.2rem] font-normal text-txt mb-3 md:text-[1.32rem]">{title}</h3>
+    <p class="text-[0.93rem] text-txt-mid font-light leading-[1.8]">
+      {boldPrefix && <strong class="font-medium text-sage">{boldPrefix}</strong>}{boldPrefix ? " " : ""}{description}
     </p>
   </div>
 </div>

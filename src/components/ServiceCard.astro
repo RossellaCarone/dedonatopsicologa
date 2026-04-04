@@ -1,5 +1,6 @@
 ---
 interface Props {
+  id: string;
   title: string;
   description: string;
   detail: string;
@@ -8,34 +9,97 @@ interface Props {
   linkHref: string;
 }
 
-const { title, description, detail, iconSvg, linkText, linkHref } = Astro.props;
+const { id, title, description, detail, iconSvg, linkText, linkHref } = Astro.props;
+const detailPanelId = `service-card-detail-${id}`;
+const titleId = `service-card-title-${id}`;
+const detailTitleId = `service-card-detail-title-${id}`;
 ---
 
-<div class="service-card bg-white rounded-sm p-10 px-8 border border-sage/15 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(44,44,42,0.07)]">
-  <div class="w-12 h-12 bg-sage-pale rounded-full flex items-center justify-center mb-6">
-    <svg
-      class="w-[22px] h-[22px] stroke-sage fill-none"
-      style="stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
-      viewBox="0 0 24 24"
-      set:html={iconSvg}
-    />
+<div class="service-card-scene h-full" data-service-card>
+  <div class="service-card-flipper h-full">
+    <article
+      class="service-card service-card-face service-card-face--front spotlight-card bg-white rounded-[1.4rem] p-10 px-8 border border-sage/15"
+      data-service-card-face="front"
+      data-spotlight
+      aria-hidden="false"
+    >
+      <div class="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-warm/60 to-transparent opacity-70"></div>
+
+      <div class="w-12 h-12 bg-sage-pale rounded-full flex items-center justify-center mb-6 shadow-[inset_0_0_0_1px_rgba(138,158,140,0.08)]">
+        <svg
+          class="w-[22px] h-[22px] stroke-sage fill-none"
+          style="stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
+          viewBox="0 0 24 24"
+          set:html={iconSvg}
+        />
+      </div>
+
+      <h3 id={titleId} class="font-serif text-[1.35rem] font-normal text-txt mb-3">
+        {title}
+      </h3>
+
+      <p class="text-[0.9rem] text-txt-mid font-light leading-[1.75]">
+        {description}
+      </p>
+
+      <button
+        type="button"
+        class="service-detail-btn inline-flex items-center gap-1.5 mt-auto pt-6 text-[0.8rem] font-medium tracking-[0.08em] uppercase text-sage transition-all cursor-pointer bg-transparent border-none p-0 font-sans"
+        data-service-card-open
+        aria-controls={detailPanelId}
+        aria-expanded="false"
+      >
+        {linkText}
+      </button>
+    </article>
+
+    <article
+      id={detailPanelId}
+      class="service-card service-card-face service-card-face--back spotlight-card bg-white rounded-[1.4rem] p-10 px-8 border border-sage/15"
+      data-service-card-face="back"
+      data-spotlight
+      aria-hidden="true"
+      aria-labelledby={detailTitleId}
+    >
+      <div class="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-warm/60 to-transparent opacity-70"></div>
+
+      <div class="flex items-start justify-between gap-4 mb-6">
+        <div class="w-12 h-12 bg-sage-pale rounded-full flex items-center justify-center shadow-[inset_0_0_0_1px_rgba(138,158,140,0.08)] shrink-0">
+          <svg
+            class="w-[22px] h-[22px] stroke-sage fill-none"
+            style="stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"
+            viewBox="0 0 24 24"
+            set:html={iconSvg}
+          />
+        </div>
+
+        <button
+          type="button"
+          class="service-card-close-btn inline-flex items-center gap-2 text-[0.72rem] font-medium tracking-[0.12em] uppercase text-txt-light hover:text-sage transition-colors cursor-pointer bg-transparent border-none p-0 font-sans"
+          data-service-card-close
+          aria-label={`Torna al riepilogo di ${title}`}
+        >
+          Indietro
+        </button>
+      </div>
+
+      <h3 id={detailTitleId} class="font-serif text-[1.35rem] font-normal text-txt mb-4">
+        {title}
+      </h3>
+
+      <p class="text-[0.9rem] text-txt-mid font-light leading-[1.8]">
+        {detail}
+      </p>
+
+      <div class="mt-auto pt-8">
+        <div class="w-12 h-px bg-warm mb-6"></div>
+        <a
+          href={linkHref}
+          class="inline-flex items-center justify-center min-h-11 px-5 bg-sage text-white text-[0.78rem] font-medium tracking-[0.08em] uppercase rounded-full hover:bg-[#6e8370] transition-colors no-underline"
+        >
+          Prenota una consulenza
+        </a>
+      </div>
+    </article>
   </div>
-
-  <h3 class="font-serif text-[1.35rem] font-normal text-txt mb-3">
-    {title}
-  </h3>
-
-  <p class="text-[0.9rem] text-txt-mid font-light leading-[1.75]">
-    {description}
-  </p>
-
-  <button
-    class="service-detail-btn inline-flex items-center gap-1.5 mt-5 text-[0.8rem] font-medium tracking-[0.08em] uppercase text-sage hover:gap-3 transition-all cursor-pointer bg-transparent border-none p-0 font-sans"
-    data-title={title}
-    data-description={description}
-    data-detail={detail}
-    data-icon={iconSvg}
-  >
-    {linkText}
-  </button>
 </div>

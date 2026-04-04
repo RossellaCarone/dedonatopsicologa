@@ -8,7 +8,7 @@ import AnimatedCounter from './AnimatedCounter.tsx';
     {stats.map((stat) => (
       <div class="text-center fade-up">
         <AnimatedCounter
-          client:visible
+          client:load
           target={stat.value as number}
           suffix={stat.suffix}
           isText={stat.isText ?? false}

@@ -1,27 +1,42 @@
 ---
+const heroHighlights = [
+  'Prima consulenza gratuita',
+  'In presenza e online',
+  'Risposta entro 24 ore',
+];
 ---
 
 <section class="pt-16">
   <div class="grid grid-cols-1 md:grid-cols-2 md:min-h-screen">
     <!-- Mobile-first: image first, desktop: image on the right -->
     <div class="hero-image order-1 md:order-2 relative overflow-hidden bg-sage-pale min-h-[42vh] sm:min-h-[48vh] md:min-h-screen">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_24%_20%,rgba(255,255,255,0.8),transparent_30%),radial-gradient(circle_at_82%_18%,rgba(196,168,130,0.2),transparent_22%),linear-gradient(135deg,#eef3ee_0%,#ede5d8_100%)]"></div>
       <div class="bg-gradient-to-br from-sage-pale to-warm-light w-full h-full flex items-center justify-center">
         <img
           src="/images/monica-hero.jpg"
           alt="Monica De Donato - Psicologa"
-          class="w-[62%] max-w-[300px] md:w-[70%] md:max-w-[380px] aspect-[3/4] object-cover rounded-sm relative z-[2]"
+          class="w-[62%] max-w-[300px] md:w-[70%] md:max-w-[380px] aspect-[3/4] object-cover rounded-sm relative z-[2] shadow-[0_24px_50px_rgba(44,44,42,0.16)]"
+          data-reveal="zoom-in"
+          style="--reveal-delay: 80ms;"
         />
 
         <!-- Decorative circles -->
-        <div class="animate-float absolute top-[12%] right-[6%] w-[96px] h-[96px] md:top-[15%] md:right-[8%] md:w-[140px] md:h-[140px] border-[1.5px] border-sage/35 rounded-full"></div>
-        <div class="animate-float-slow absolute top-[8%] right-[2%] w-[140px] h-[140px] md:top-[10%] md:right-[4%] md:w-[200px] md:h-[200px] border border-warm/20 rounded-full"></div>
+        <div class="animate-float absolute top-[12%] right-[6%] w-[96px] h-[96px] md:top-[15%] md:right-[8%] md:w-[140px] md:h-[140px] border-[1.5px] border-sage/35 rounded-full" data-parallax="0.1"></div>
+        <div class="animate-float-slow absolute top-[8%] right-[2%] w-[140px] h-[140px] md:top-[10%] md:right-[4%] md:w-[200px] md:h-[200px] border border-warm/20 rounded-full" data-parallax="0.14"></div>
+        <div class="ambient-orb absolute -left-12 top-[22%] h-24 w-24 rounded-full bg-white/45 blur-2xl md:h-36 md:w-36" data-parallax="0.18"></div>
+        <div class="floating-badge absolute bottom-5 left-5 z-[3] max-w-[230px] rounded-[1.35rem] border border-white/50 bg-white/70 px-4 py-3 shadow-[0_18px_40px_rgba(44,44,42,0.12)] backdrop-blur-xl md:bottom-8 md:left-8">
+          <p class="text-[0.68rem] uppercase tracking-[0.18em] text-sage mb-1">Disponibilità</p>
+          <p class="font-serif text-[1.2rem] leading-tight text-txt">Online e in studio</p>
+          <p class="text-[0.78rem] leading-[1.6] text-txt-mid mt-1">Polignano a Mare, Monopoli e consulenze a distanza.</p>
+        </div>
       </div>
     </div>
 
     <!-- Left column: text -->
     <div class="hero-text order-2 md:order-1 py-10 md:py-24 px-6 md:px-8 lg:pl-28 lg:pr-16">
-    <div class="fade-up">
-        <p class="text-[0.72rem] font-medium tracking-[0.2em] uppercase text-warm mb-5 md:mb-6">
+      <div data-reveal="fade-right" style="--reveal-delay: 40ms;">
+        <p class="inline-flex items-center gap-2 rounded-full border border-sage/15 bg-white/70 px-3 py-2 text-[0.72rem] font-medium tracking-[0.18em] uppercase text-warm mb-5 md:mb-6 shadow-[0_10px_24px_rgba(44,44,42,0.04)] backdrop-blur">
+          <span class="h-2 w-2 rounded-full bg-sage"></span>
           Psicologa Clinica e Dinamica
         </p>
 
@@ -40,6 +55,19 @@
           <a href="#chi-sono" class="w-full sm:w-auto text-center border border-txt/30 text-txt py-3.5 px-8 text-[0.85rem] tracking-[0.08em] uppercase rounded-sm hover:border-sage hover:text-sage transition-all">
             Scopri di più
           </a>
+        </div>
+
+        <div class="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          {heroHighlights.map((highlight, index) => (
+            <div
+              class="rounded-[1.2rem] border border-sage/12 bg-white/70 px-4 py-4 backdrop-blur shadow-[0_12px_32px_rgba(44,44,42,0.04)]"
+              data-reveal="fade-up"
+              style={`--reveal-delay: ${180 + index * 90}ms;`}
+            >
+              <p class="text-[0.72rem] uppercase tracking-[0.14em] text-txt-light">Valore</p>
+              <p class="mt-2 text-[0.95rem] font-medium leading-[1.5] text-txt">{highlight}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

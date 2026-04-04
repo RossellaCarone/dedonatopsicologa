@@ -7,18 +7,21 @@ import TestimonialCarousel from './TestimonialCarousel.tsx';
   <div class="max-w-[1200px] mx-auto">
 
     <!-- Header -->
-    <div class="text-center mb-10 md:mb-16 fade-up">
+    <div class="text-center mb-10 md:mb-16" data-reveal="fade-up">
       <p class="text-[0.72rem] font-medium tracking-[0.2em] uppercase text-warm mb-4">
         Perché scegliermi
       </p>
       <h2 class="font-serif font-light text-txt leading-[1.2] text-[clamp(2rem,3.5vw,3rem)]">
         Il mio <em class="italic text-sage">approccio</em> al tuo benessere
       </h2>
+      <p class="mx-auto mt-5 max-w-[680px] text-base font-light leading-[1.8] text-txt-mid">
+        Una sezione più dinamica, ma sempre misurata: qui emergono i principi che guidano ogni percorso terapeutico.
+      </p>
     </div>
 
     <!-- Carousel island -->
-    <div class="fade-up">
-      <TestimonialCarousel testimonials={testimonials} />
+    <div data-reveal="fade-up" style="--reveal-delay: 120ms;">
+      <TestimonialCarousel client:load testimonials={testimonials} />
     </div>
 
   </div>

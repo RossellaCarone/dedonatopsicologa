@@ -10,6 +10,7 @@ interface Props {
 export default function AnimatedCounter({ target, suffix, duration = 2000, isText = false }: Props) {
   const elementRef = useRef<HTMLDivElement>(null);
   const hasAnimated = useRef(false);
+  const frameRef = useRef<number>();
 
   useEffect(() => {
     if (isText) return;
@@ -17,38 +18,68 @@ export default function AnimatedCounter({ target, suffix, duration = 2000, isTex
     const el = elementRef.current;
     if (!el) return;
 
+    const renderValue = (value: number) => {
+      el.textContent = `${Math.floor(value)}${suffix}`;
+    };
+
+    const startAnimation = () => {
+      if (hasAnimated.current) return;
+
+      hasAnimated.current = true;
+      const start = performance.now();
+
+      const tick = (now: number) => {
+        const elapsed = now - start;
+        const t = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+
+        renderValue(eased * target);
+
+        if (t < 1) {
+          frameRef.current = requestAnimationFrame(tick);
+        }
+      };
+
+      frameRef.current = requestAnimationFrame(tick);
+    };
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      renderValue(target);
+      hasAnimated.current = true;
+      return;
+    }
+
+    const isAlreadyVisible = () => {
+      const rect = el.getBoundingClientRect();
+      return rect.top < window.innerHeight * 0.9 && rect.bottom > window.innerHeight * 0.1;
+    };
+
+    if (isAlreadyVisible()) {
+      startAnimation();
+      return () => {
+        if (frameRef.current) cancelAnimationFrame(frameRef.current);
+      };
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated.current) {
-            hasAnimated.current = true;
-            const start = performance.now();
-
-            const tick = (now: number) => {
-              const elapsed = now - start;
-              const t = Math.min(elapsed / duration, 1);
-              const eased = 1 - Math.pow(1 - t, 3);
-              const current = eased * target;
-
-              if (el) {
-                el.textContent = `${Math.floor(current)}${suffix}`;
-              }
-
-              if (t < 1) {
-                requestAnimationFrame(tick);
-              }
-            };
-
-            requestAnimationFrame(tick);
+          if (entry.isIntersecting) {
+            startAnimation();
+            observer.disconnect();
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.2, rootMargin: '0px 0px -10% 0px' }
     );
 
     observer.observe(el);
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    };
   }, [target, suffix, duration, isText]);
 
   const style = {

@@ -1,13 +1,19 @@
 ---
 import { approachSteps } from "../data/approach";
 import ApproachStep from "./ApproachStep.astro";
+
+const guidingPoints = [
+  "Ascolto autentico e non giudicante",
+  "Lettura clinica profonda della tua storia",
+  "Obiettivi concreti, costruiti insieme",
+];
 ---
 
 <section id="approccio" class="bg-sage-pale py-16 md:py-28 px-6 md:px-8 lg:px-28">
   <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 lg:gap-24 items-start">
 
     <!-- Left column -->
-    <div class="fade-up">
+    <div class="md:sticky md:top-28" data-reveal="fade-up">
       <p class="text-[0.72rem] font-medium tracking-[0.2em] uppercase text-warm mb-4">
         Il mio metodo
       </p>
@@ -21,16 +27,29 @@ import ApproachStep from "./ApproachStep.astro";
       <p class="text-base text-txt-mid font-light leading-[1.8]">
         Il mio intervento ha un'impronta clinica e dinamica, attenta alle dinamiche interiori e al modo in cui queste si riflettono nei tuoi legami quotidiani. Con empatia e competenza, ti accompagnerò nell'esplorazione dei tuoi vissuti per favorire un cambiamento autentico e duraturo.
       </p>
+
+      <div class="mt-8 rounded-[1.5rem] border border-sage/16 bg-white/60 p-6 shadow-[0_16px_36px_rgba(44,44,42,0.05)] backdrop-blur">
+        <p class="text-[0.68rem] font-medium tracking-[0.18em] uppercase text-sage">In ogni percorso</p>
+        <div class="mt-4 flex flex-col gap-3">
+          {guidingPoints.map((point) => (
+            <div class="flex items-start gap-3 text-[0.92rem] text-txt-mid leading-[1.6]">
+              <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-warm"></span>
+              <span>{point}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
 
     <!-- Right column: steps -->
-    <div class="fade-up">
-      {approachSteps.map((step) => (
+    <div class="flex flex-col gap-4 md:gap-5">
+      {approachSteps.map((step, index) => (
         <ApproachStep
           number={step.number}
           title={step.title}
           boldPrefix={step.boldPrefix}
           description={step.description}
+          delay={120 + index * 90}
         />
       ))}
     </div>
