@@ -80,19 +80,20 @@ export default function TestimonialCarousel({ testimonials }: Props) {
 
   const cardStyle: Record<string, string | number> = {
     background: '#faf8f4',
-    borderRadius: '4px',
-    padding: '2rem',
+    borderRadius: isMobile ? '10px' : '8px',
+    padding: isMobile ? '1.25rem' : '2rem',
     flexShrink: 0,
+    height: '100%',
   };
 
   const quoteMark = (
     <div
       style={{
         fontFamily: 'Georgia, serif',
-        fontSize: '2.5rem',
+        fontSize: isMobile ? '2.1rem' : '2.5rem',
         color: '#c8d8c9',
         lineHeight: 0.5,
-        marginBottom: '1rem',
+        marginBottom: isMobile ? '0.75rem' : '1rem',
       }}
     >
       &ldquo;
@@ -104,13 +105,13 @@ export default function TestimonialCarousel({ testimonials }: Props) {
       {quoteMark}
       <p
         style={{
-          fontSize: '0.95rem',
+          fontSize: isMobile ? '0.9rem' : '0.95rem',
           color: '#5a5a56',
           fontWeight: 300,
-          lineHeight: 1.8,
+          lineHeight: isMobile ? 1.7 : 1.8,
           fontStyle: 'italic',
-          marginBottom: '1.5rem',
-          margin: '0 0 1.5rem 0',
+          marginBottom: isMobile ? '1.1rem' : '1.5rem',
+          margin: `0 0 ${isMobile ? '1.1rem' : '1.5rem'} 0`,
         }}
       >
         {t.quote}
@@ -124,8 +125,8 @@ export default function TestimonialCarousel({ testimonials }: Props) {
       >
         <div
           style={{
-            width: '36px',
-            height: '36px',
+            width: isMobile ? '34px' : '36px',
+            height: isMobile ? '34px' : '36px',
             borderRadius: '50%',
             background: '#c8d8c9',
             display: 'flex',
@@ -142,9 +143,11 @@ export default function TestimonialCarousel({ testimonials }: Props) {
         <div>
           <div
             style={{
-              fontSize: '0.85rem',
+              fontSize: isMobile ? '0.84rem' : '0.85rem',
               fontWeight: 500,
               color: '#2c2c2a',
+              lineHeight: 1.35,
+              marginBottom: '0.2rem',
             }}
           >
             {t.name}
@@ -153,6 +156,7 @@ export default function TestimonialCarousel({ testimonials }: Props) {
             style={{
               fontSize: '0.78rem',
               color: '#9a9a94',
+              lineHeight: 1.45,
             }}
           >
             {t.role}
@@ -167,7 +171,7 @@ export default function TestimonialCarousel({ testimonials }: Props) {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
           gap: '2rem',
         }}
       >
@@ -187,7 +191,7 @@ export default function TestimonialCarousel({ testimonials }: Props) {
         <div
           style={{
             display: 'flex',
-            gap: '1rem',
+            gap: 0,
           }}
         >
           {testimonials.map((t, idx) => (
@@ -196,6 +200,7 @@ export default function TestimonialCarousel({ testimonials }: Props) {
               style={{
                 flex: '0 0 100%',
                 minWidth: 0,
+                padding: '0 0.25rem',
               }}
             >
               {renderCard(t, idx)}
