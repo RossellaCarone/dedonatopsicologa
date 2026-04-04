@@ -87,6 +87,39 @@
   animation: float-slow 8s ease-in-out infinite;
 }
 
+/* Scroll-to-top button */
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--sage);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s, background 0.2s;
+  pointer-events: none;
+  z-index: 50;
+  box-shadow: 0 4px 16px rgba(44, 44, 42, 0.12);
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.scroll-to-top:hover {
+  background: #6e8370;
+}
+
 /* Service card link arrow animation */
 .service-link-arrow {
   transition: transform 0.2s ease;

@@ -81,6 +81,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <body>
   <slot />
 
+  <!-- Scroll to top button -->
+  <button class="scroll-to-top" id="scroll-top" aria-label="Torna su">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
   <!-- Scroll animations observer -->
   <script>
     const observer = new IntersectionObserver((entries) => {
@@ -103,6 +110,21 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         } else {
           nav.classList.remove('scrolled');
         }
+      });
+    }
+
+    // Scroll to top button
+    const scrollTopBtn = document.getElementById('scroll-top');
+    if (scrollTopBtn) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+          scrollTopBtn.classList.add('visible');
+        } else {
+          scrollTopBtn.classList.remove('visible');
+        }
+      });
+      scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
 
