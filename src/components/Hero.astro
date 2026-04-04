@@ -1,48 +1,47 @@
 ---
 ---
 
-<section class="min-h-screen grid grid-cols-1 md:grid-cols-2 items-center pt-16">
-  <!-- Left column: text -->
-  <div class="hero-text py-14 md:py-24 px-6 md:px-8 lg:pl-28 lg:pr-16">
-    <div class="fade-up">
-      <p class="text-[0.72rem] font-medium tracking-[0.2em] uppercase text-warm mb-6">
-        Psicologa Clinica e Dinamica
-      </p>
+<section class="pt-16">
+  <div class="grid grid-cols-1 md:grid-cols-2 md:min-h-screen">
+    <!-- Mobile-first: image first, desktop: image on the right -->
+    <div class="hero-image order-1 md:order-2 relative overflow-hidden bg-sage-pale min-h-[42vh] sm:min-h-[48vh] md:min-h-screen">
+      <div class="bg-gradient-to-br from-sage-pale to-warm-light w-full h-full flex items-center justify-center">
+        <img
+          src="/images/monica-hero.jpg"
+          alt="Monica De Donato - Psicologa"
+          class="w-[62%] max-w-[300px] md:w-[70%] md:max-w-[380px] aspect-[3/4] object-cover rounded-sm relative z-[2]"
+        />
 
-      <h1 class="font-serif font-light text-txt leading-[1.1] mb-6 text-[clamp(3rem,5vw,4.5rem)]">
-        Un percorso verso<br>
-        il tuo <em class="italic text-sage">benessere</em><br>
-        interiore
-      </h1>
-
-      <p class="text-[1.05rem] text-txt-mid font-light max-w-[440px] mb-10 leading-[1.75]">
-        Ti accompagno in un percorso cucito su misura, con ascolto e professionalità. Insieme esploreremo le tue risorse interiori per affrontare le difficoltà e ritrovare il tuo equilibrio.
-      </p>
-
-      <div class="flex flex-row gap-4 flex-wrap">
-        <a href="#contatti" class="bg-sage text-white py-3.5 px-8 text-[0.85rem] font-medium tracking-[0.08em] uppercase rounded-sm hover:bg-[#6e8370] transition-colors">
-          Prenota una consulenza
-        </a>
-        <a href="#chi-sono" class="border border-txt/30 text-txt py-3.5 px-8 text-[0.85rem] tracking-[0.08em] uppercase rounded-sm hover:border-sage hover:text-sage transition-all">
-          Scopri di più
-        </a>
+        <!-- Decorative circles -->
+        <div class="animate-float absolute top-[12%] right-[6%] w-[96px] h-[96px] md:top-[15%] md:right-[8%] md:w-[140px] md:h-[140px] border-[1.5px] border-sage/35 rounded-full"></div>
+        <div class="animate-float-slow absolute top-[8%] right-[2%] w-[140px] h-[140px] md:top-[10%] md:right-[4%] md:w-[200px] md:h-[200px] border border-warm/20 rounded-full"></div>
       </div>
     </div>
-  </div>
 
-  <!-- Right column: image -->
-  <div class="hero-image hidden md:block h-screen bg-sage-pale relative overflow-hidden">
-    <div class="bg-gradient-to-br from-sage-pale to-warm-light w-full h-full flex items-center justify-center">
-      <img
-        src="/images/monica-hero.jpg"
-        alt="Monica De Donato - Psicologa"
-        class="w-[70%] max-w-[380px] aspect-[3/4] object-cover rounded-sm relative z-[2]"
-      />
+    <!-- Left column: text -->
+    <div class="hero-text order-2 md:order-1 py-10 md:py-24 px-6 md:px-8 lg:pl-28 lg:pr-16">
+    <div class="fade-up">
+        <p class="text-[0.72rem] font-medium tracking-[0.2em] uppercase text-warm mb-5 md:mb-6">
+          Psicologa Clinica e Dinamica
+        </p>
 
-      <!-- Decorative circles -->
-      <div class="animate-float absolute top-[15%] right-[8%] w-[140px] h-[140px] border-[1.5px] border-sage/35 rounded-full"></div>
-      <div class="animate-float-slow absolute top-[10%] right-[4%] w-[200px] h-[200px] border border-warm/20 rounded-full"></div>
+        <h1 class="font-serif font-light text-txt leading-[1.1] mb-6 text-[clamp(2.5rem,11vw,4.5rem)]">
+          Un percorso verso il tuo <em class="italic text-sage">benessere</em> interiore
+        </h1>
 
+        <p class="text-[1rem] md:text-[1.05rem] text-txt-mid font-light max-w-[440px] mb-8 md:mb-10 leading-[1.75]">
+          Ti accompagno in un percorso cucito su misura, con ascolto e professionalità. Insieme esploreremo le tue risorse interiori per affrontare le difficoltà e ritrovare il tuo equilibrio.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 sm:flex-wrap">
+          <a href="#contatti" class="w-full sm:w-auto text-center bg-sage text-white py-3.5 px-8 text-[0.85rem] font-medium tracking-[0.08em] uppercase rounded-sm hover:bg-[#6e8370] transition-colors">
+            Prenota una consulenza
+          </a>
+          <a href="#chi-sono" class="w-full sm:w-auto text-center border border-txt/30 text-txt py-3.5 px-8 text-[0.85rem] tracking-[0.08em] uppercase rounded-sm hover:border-sage hover:text-sage transition-all">
+            Scopri di più
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>

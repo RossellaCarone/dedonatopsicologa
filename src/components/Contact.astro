@@ -2,7 +2,7 @@
 import ContactForm from './ContactForm.tsx';
 ---
 
-<section id="contatti" class="bg-txt py-16 md:py-28 px-6 md:px-8 lg:px-28 text-white">
+<section id="contatti" class="bg-gradient-to-b from-[#3a483f] to-[#313d35] py-16 md:py-28 px-6 md:px-8 lg:px-28 text-white">
   <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-start">
 
     <!-- Left column -->
@@ -113,7 +113,15 @@ import ContactForm from './ContactForm.tsx';
 
     <!-- Right column: contact form (Preact island) -->
     <div class="fade-up">
-      <ContactForm client:visible />
+      <div class="bg-cream rounded-lg p-6 md:p-8 shadow-[0_16px_40px_rgba(18,24,20,0.25)] border border-white/10">
+        <p class="text-[0.68rem] font-medium tracking-[0.18em] uppercase text-txt-light mb-2">
+          Richiedi informazioni
+        </p>
+        <h3 class="font-serif text-[1.8rem] md:text-[2rem] font-light text-txt leading-[1.15] mb-6">
+          Scrivimi senza impegno
+        </h3>
+        <ContactForm client:visible />
+      </div>
     </div>
 
   </div>

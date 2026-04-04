@@ -3,17 +3,17 @@ import { useState, useRef } from 'preact/hooks';
 type FormState = 'idle' | 'loading' | 'success' | 'error';
 
 const inputBase: Record<string, string | number> = {
-  background: 'rgba(255,255,255,0.06)',
-  border: '1px solid rgba(255,255,255,0.12)',
-  borderRadius: '2px',
+  background: '#ffffff',
+  border: '1px solid rgba(44,44,42,0.16)',
+  borderRadius: '6px',
   padding: '0.85rem 1rem',
   fontFamily: "'DM Sans', system-ui, sans-serif",
   fontSize: '0.9rem',
-  color: 'white',
+  color: '#2c2c2a',
   outline: 'none',
   width: '100%',
   boxSizing: 'border-box',
-  transition: 'border-color 0.2s, box-shadow 0.2s',
+  transition: 'border-color 0.2s, box-shadow 0.2s, background-color 0.2s',
 };
 
 const focusStyle = {
@@ -22,7 +22,7 @@ const focusStyle = {
 };
 
 const blurStyle = {
-  borderColor: 'rgba(255,255,255,0.12)',
+  borderColor: 'rgba(44,44,42,0.16)',
   boxShadow: 'none',
 };
 
@@ -89,7 +89,7 @@ export default function ContactForm() {
     fontWeight: 500,
     letterSpacing: '0.1em',
     textTransform: 'uppercase',
-    color: 'rgba(255,255,255,0.45)',
+    color: 'rgba(44,44,42,0.6)',
     marginBottom: '0.4rem',
   };
 
@@ -158,29 +158,30 @@ export default function ContactForm() {
         <select
           name="tipo_consulenza"
           required
+          defaultValue=""
           style={{ ...inputBase, appearance: 'none' as any }}
           onFocus={(e) => applyFocus(e.currentTarget as HTMLElement)}
           onBlur={(e) => applyBlur(e.currentTarget as HTMLElement)}
         >
-          <option value="" disabled selected style={{ background: '#2c2c2a', color: 'white' }}>
+          <option value="" disabled>
             Seleziona un servizio
           </option>
-          <option value="Prima consulenza gratuita" style={{ background: '#2c2c2a', color: 'white' }}>
+          <option value="Prima consulenza gratuita">
             Prima consulenza gratuita
           </option>
-          <option value="Supporto psicologico individuale" style={{ background: '#2c2c2a', color: 'white' }}>
+          <option value="Supporto psicologico individuale">
             Supporto psicologico individuale
           </option>
-          <option value="Consulenza di coppia" style={{ background: '#2c2c2a', color: 'white' }}>
+          <option value="Consulenza di coppia">
             Consulenza di coppia
           </option>
-          <option value="Consulenza online" style={{ background: '#2c2c2a', color: 'white' }}>
+          <option value="Consulenza online">
             Consulenza online
           </option>
-          <option value="Supporto nelle transizioni" style={{ background: '#2c2c2a', color: 'white' }}>
+          <option value="Supporto nelle transizioni">
             Supporto nelle transizioni
           </option>
-          <option value="Altro" style={{ background: '#2c2c2a', color: 'white' }}>
+          <option value="Altro">
             Altro
           </option>
         </select>
@@ -208,11 +209,17 @@ export default function ContactForm() {
       <style>{`
         form input::placeholder,
         form textarea::placeholder {
-          color: rgba(255,255,255,0.25);
+          color: rgba(44,44,42,0.42);
         }
         form select option {
-          background: #2c2c2a;
-          color: white;
+          background: #ffffff;
+          color: #2c2c2a;
+        }
+        @media (min-width: 769px) {
+          form button[type="submit"] {
+            width: auto;
+            min-width: 220px;
+          }
         }
       `}</style>
 
@@ -229,9 +236,10 @@ export default function ContactForm() {
           letterSpacing: '0.08em',
           textTransform: 'uppercase',
           border: 'none',
-          borderRadius: '2px',
+          borderRadius: '6px',
           cursor: formState === 'loading' ? 'not-allowed' : 'pointer',
-          alignSelf: 'flex-start',
+          width: '100%',
+          alignSelf: 'stretch',
           transition: 'background 0.2s',
           fontFamily: "'DM Sans', system-ui, sans-serif",
         }}
