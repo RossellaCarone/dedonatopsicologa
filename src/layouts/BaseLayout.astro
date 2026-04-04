@@ -6,7 +6,7 @@ interface Props {
 
 const {
   title = 'Monica De Donato – Psicologa',
-  description = 'Psicologa e Psicoterapeuta a Polignano a Mare e Monopoli. Percorsi di psicoterapia individuale, di coppia, consulenza online e EMDR. Prima consulenza gratuita.',
+  description = 'Psicologa Clinica e Dinamica a Polignano a Mare e Monopoli. Percorsi di supporto psicologico individuale, di coppia e per adolescenti, in studio e online. Prima consulenza gratuita.',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -45,7 +45,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     "provider": {
       "@type": "Person",
       "name": "Monica De Donato",
-      "jobTitle": "Psicologa e Psicoterapeuta",
+      "jobTitle": "Psicologa Clinica e Dinamica",
       "telephone": "+393388000616",
       "email": "psicologadedonato@gmail.com",
       "url": "https://dedonatopsicologa.com",
@@ -81,13 +81,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <body>
   <slot />
 
-  <!-- Scroll to top button -->
-  <button class="scroll-to-top" id="scroll-top" aria-label="Torna su">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="18 15 12 9 6 15"></polyline>
-    </svg>
-  </button>
-
   <!-- Scroll animations observer -->
   <script>
     const observer = new IntersectionObserver((entries) => {
@@ -110,21 +103,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         } else {
           nav.classList.remove('scrolled');
         }
-      });
-    }
-
-    // Scroll to top button
-    const scrollTopBtn = document.getElementById('scroll-top');
-    if (scrollTopBtn) {
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 500) {
-          scrollTopBtn.classList.add('visible');
-        } else {
-          scrollTopBtn.classList.remove('visible');
-        }
-      });
-      scrollTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
 

@@ -7,19 +7,22 @@ export interface Stat {
 
 export const stats: Stat[] = [
   {
-    value: 10,
-    suffix: "+",
-    label: "Anni di esperienza",
-  },
-  {
-    value: 500,
-    suffix: "+",
-    label: "Pazienti seguiti",
-  },
-  {
-    value: 3,
+    value: "Albo A",
     suffix: "",
-    label: "Specializzazioni",
+    label: "Ordine Psicologi Puglia",
+    isText: true,
+  },
+  {
+    value: "Clinica",
+    suffix: "",
+    label: "e Dinamica",
+    isText: true,
+  },
+  {
+    value: "Sistemico",
+    suffix: "",
+    label: "Relazionale",
+    isText: true,
   },
   {
     value: "Online",
