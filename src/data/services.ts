@@ -32,15 +32,15 @@ export const services: Service[] = [
     iconSvg: `<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
   },
   {
-    id: "consulenza-online",
-    title: "Consulenza online",
+    id: "supporto-adolescenti",
+    title: "Consulenza adolescenziale",
     description:
-      "Sedute di psicologia a distanza tramite piattaforme sicure, per chi preferisce la comodità di casa o vive lontano. Stesso livello di qualità e riservatezza.",
+      "Percorsi dedicati ai ragazzi per affrontare difficoltà scolastiche, relazionali, identitarie e il complesso passaggio verso l'età adulta, in un ambiente di ascolto e non giudizio.",
     detail:
-      "La consulenza online permette di accedere a un supporto psicologico professionale ovunque ti trovi, senza rinunciare alla qualità e alla riservatezza di un incontro in studio. Le sedute si svolgono su piattaforme sicure e dedicate, in uno spazio virtuale che rimane riservato e protetto. È una modalità sempre più scelta da chi ha ritmi intensi, vive fuori città o semplicemente si trova più a proprio agio nel proprio ambiente.",
+      "L'adolescenza è un periodo di grandi trasformazioni, spesso accompagnato da confusione, ansia e conflitti. Offro uno spazio riservato in cui i ragazzi possono esprimersi liberamente, esplorare la propria identità, gestire le pressioni scolastiche e sociali, e sviluppare una maggiore consapevolezza emotiva. Lavoro con un approccio rispettoso e non direttivo, costruendo insieme ai ragazzi strumenti concreti per affrontare le sfide di questa fase delicata.",
     linkText: "Scopri →",
     linkHref: "#contatti",
-    iconSvg: `<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>`,
+    iconSvg: `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>`,
   },
   {
     id: "gestione-ansia",
@@ -54,15 +54,15 @@ export const services: Service[] = [
     iconSvg: `<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 6v6l4 2"/>`,
   },
   {
-    id: "prima-consulenza-gratuita",
-    title: "Prima consulenza gratuita",
+    id: "sostegno-genitorialita",
+    title: "Sostegno alla genitorialità",
     description:
-      "Un incontro conoscitivo di 30 minuti, senza impegno, per conoscerci, capire il tuo momento e valutare insieme se e come posso aiutarti.",
+      "Supporto ai genitori per migliorare la relazione con i figli, affrontare le sfide educative quotidiane e ritrovare equilibrio e serenità nel proprio ruolo genitoriale.",
     detail:
-      "La prima consulenza è un momento informale e senza impegno: ci conosciamo, mi racconti cosa stai attraversando e insieme valutiamo se e come potrei accompagnarti. Non è ancora una seduta terapeutica, ma uno spazio per chiarire dubbi, capire cosa aspettarti da un percorso psicologico e sentirti libero/a di decidere. È online o in presenza, dura circa 30 minuti ed è completamente gratuita.",
-    linkText: "Prenota ora →",
+      "Essere genitori è un'esperienza intensa e complessa, che porta con sé dubbi, fatiche e momenti di sconforto. Il sostegno alla genitorialità offre uno spazio in cui esplorare le difficoltà educative, comprendere i bisogni emotivi dei figli, migliorare la comunicazione familiare e sviluppare strategie efficaci e rispettose. Lavoro sia con singoli genitori che con coppie, accompagnandovi nel costruire una relazione più autentica e consapevole con i vostri figli.",
+    linkText: "Scopri →",
     linkHref: "#contatti",
-    iconSvg: `<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>`,
+    iconSvg: `<path d="M3 21h18M4 18h16M6 18v-4.7M18 18v-4.7M10 18V9M14 18V9M12 2L4 9h16z"/>`,
   },
   {
     id: "supporto-transizioni-di-vita",

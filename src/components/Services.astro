@@ -7,7 +7,7 @@ import ServiceCard from './ServiceCard.astro';
 
   <!-- Header -->
   <div class="max-w-[1200px] mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-end">
-    <div data-reveal="fade-up" style="--reveal-delay: 40ms;">
+    <div>
       <p class="text-[0.72rem] font-medium tracking-[0.2em] uppercase text-warm mb-4">
         Cosa offro
       </p>
@@ -15,7 +15,7 @@ import ServiceCard from './ServiceCard.astro';
         I miei <em class="italic text-sage">servizi</em>
       </h2>
     </div>
-    <div data-reveal="fade-up" style="--reveal-delay: 120ms;">
+    <div>
       <p class="text-base text-txt-mid font-light leading-[1.8]">
         Ogni percorso è unico. Offro un servizio su misura, calibrato sulle esigenze specifiche di ogni persona, online o in presenza.
       </p>
@@ -27,7 +27,6 @@ import ServiceCard from './ServiceCard.astro';
     {services.map((service) => (
       <div class="fade-up h-full">
         <ServiceCard
-          id={service.id}
           title={service.title}
           description={service.description}
           detail={service.detail}
@@ -41,71 +40,79 @@ import ServiceCard from './ServiceCard.astro';
 
 </section>
 
+<!-- Service Detail Modal -->
+<div id="service-modal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4" style="background:rgba(0,0,0,0.5)">
+  <div class="relative bg-cream rounded-lg p-8 md:p-10 max-w-[500px] w-[90%] max-h-[80vh] overflow-y-auto" id="service-modal-content">
+    <button id="service-modal-close" class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-txt-light hover:text-txt transition-colors cursor-pointer bg-transparent border-none text-xl leading-none" aria-label="Chiudi">
+      &times;
+    </button>
+    <div class="flex justify-center">
+      <div class="w-12 h-12 bg-sage-pale rounded-full flex items-center justify-center">
+        <svg id="service-modal-icon" class="w-[22px] h-[22px] stroke-sage fill-none" style="stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"></svg>
+      </div>
+    </div>
+    <h2 id="service-modal-title" class="font-serif text-[1.5rem] font-normal text-txt text-center mt-6 mb-0"></h2>
+    <p id="service-modal-desc" class="text-[0.95rem] text-txt-mid font-light leading-[1.7] mt-3"></p>
+    <div class="w-12 h-px bg-warm my-6"></div>
+    <p id="service-modal-detail" class="text-[0.9rem] text-txt-mid font-light leading-[1.8]"></p>
+    <a href="#contatti" id="service-modal-cta" class="block mt-8 bg-sage text-white text-center py-3.5 text-[0.85rem] font-medium tracking-[0.08em] uppercase rounded-sm hover:bg-[#6e8370] transition-colors no-underline">
+      Prenota una consulenza
+    </a>
+  </div>
+</div>
+
 <script>
-  const serviceCards = Array.from(document.querySelectorAll<HTMLElement>('[data-service-card]'));
+  const modal = document.getElementById('service-modal');
+  const modalContent = document.getElementById('service-modal-content');
+  const modalTitle = document.getElementById('service-modal-title');
+  const modalDesc = document.getElementById('service-modal-desc');
+  const modalDetail = document.getElementById('service-modal-detail');
+  const modalIcon = document.getElementById('service-modal-icon');
+  const modalClose = document.getElementById('service-modal-close');
+  const modalCta = document.getElementById('service-modal-cta');
 
-  function syncCardHeight(card: HTMLElement) {
-    const front = card.querySelector<HTMLElement>('[data-service-card-face="front"]');
-    const back = card.querySelector<HTMLElement>('[data-service-card-face="back"]');
-    if (!front || !back) return;
-
-    card.style.removeProperty('--service-card-height');
-    const nextHeight = Math.max(front.scrollHeight, back.scrollHeight);
-    card.style.setProperty('--service-card-height', `${nextHeight}px`);
+  function openModal(title: string, description: string, detail: string, icon: string) {
+    if (!modal || !modalTitle || !modalDesc || !modalDetail || !modalIcon) return;
+    modalTitle.textContent = title;
+    modalDesc.textContent = description;
+    modalDetail.textContent = detail;
+    modalIcon.innerHTML = icon;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
   }
 
-  function syncAllCardHeights() {
-    serviceCards.forEach(syncCardHeight);
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = '';
   }
 
-  function setCardState(card: HTMLElement, flipped: boolean) {
-    card.classList.toggle('is-flipped', flipped);
-    const openButton = card.querySelector<HTMLButtonElement>('[data-service-card-open]');
-    const front = card.querySelector<HTMLElement>('[data-service-card-face="front"]');
-    const back = card.querySelector<HTMLElement>('[data-service-card-face="back"]');
-
-    openButton?.setAttribute('aria-expanded', String(flipped));
-    front?.setAttribute('aria-hidden', String(flipped));
-    back?.setAttribute('aria-hidden', String(!flipped));
-  }
-
-  function closeOtherCards(currentCard: HTMLElement) {
-    serviceCards.forEach((card) => {
-      if (card !== currentCard) {
-        setCardState(card, false);
-      }
-    });
-  }
-
-  serviceCards.forEach((card) => {
-    const openButton = card.querySelector<HTMLButtonElement>('[data-service-card-open]');
-    const closeButton = card.querySelector<HTMLButtonElement>('[data-service-card-close]');
-
-    syncCardHeight(card);
-    setCardState(card, card.classList.contains('is-flipped'));
-
-    openButton?.addEventListener('click', () => {
-      closeOtherCards(card);
-      setCardState(card, true);
-      requestAnimationFrame(() => closeButton?.focus());
-    });
-
-    closeButton?.addEventListener('click', () => {
-      setCardState(card, false);
-      requestAnimationFrame(() => openButton?.focus());
-    });
-
-    card.addEventListener('keydown', (event) => {
-      if (event.key !== 'Escape' || !card.classList.contains('is-flipped')) return;
-
-      event.preventDefault();
-      setCardState(card, false);
-      requestAnimationFrame(() => openButton?.focus());
+  // Attach click to all service detail buttons
+  document.querySelectorAll('.service-detail-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = (btn as HTMLElement).dataset.title || '';
+      const d = (btn as HTMLElement).dataset.description || '';
+      const dt = (btn as HTMLElement).dataset.detail || '';
+      const ic = (btn as HTMLElement).dataset.icon || '';
+      openModal(t, d, dt, ic);
     });
   });
 
-  const scheduleHeightSync = () => requestAnimationFrame(syncAllCardHeights);
-  window.addEventListener('resize', scheduleHeightSync);
-  window.addEventListener('load', scheduleHeightSync, { once: true });
-  document.fonts?.ready.then(scheduleHeightSync);
+  // Close handlers
+  modalClose?.addEventListener('click', closeModal);
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // CTA closes modal and scrolls
+  modalCta?.addEventListener('click', (e) => {
+    e.preventDefault();
+    closeModal();
+    document.getElementById('contatti')?.scrollIntoView({ behavior: 'smooth' });
+  });
 </script>

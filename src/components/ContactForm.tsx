@@ -22,7 +22,7 @@ const quickChoices = [
   'Prima consulenza gratuita',
   'Supporto psicologico individuale',
   'Consulenza di coppia',
-  'Consulenza online',
+  'Consulenza adolescenziale',
 ];
 
 const inputBase: Record<string, string | number> = {
@@ -317,11 +317,17 @@ export default function ContactForm() {
           <option value="Consulenza di coppia">
             Consulenza di coppia
           </option>
-          <option value="Consulenza online">
-            Consulenza online
+          <option value="Consulenza adolescenziale">
+            Consulenza adolescenziale
           </option>
-          <option value="Supporto nelle transizioni">
-            Supporto nelle transizioni
+          <option value="Gestione dell'ansia">
+            Gestione dell'ansia
+          </option>
+          <option value="Sostegno alla genitorialità">
+            Sostegno alla genitorialità
+          </option>
+          <option value="Supporto nelle transizioni di vita">
+            Supporto nelle transizioni di vita
           </option>
           <option value="Altro">
             Altro
